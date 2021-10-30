@@ -23,6 +23,9 @@ function SignIn() {
         {
           username: idRef.current.value,
           password: passwordRef.current.value,
+        },
+        {
+          withCredentials: true,
         }
       );
       dispatch({ type: 'signin', payload: userInfo.data });
@@ -35,55 +38,55 @@ function SignIn() {
   };
   return (
     <section class='section-border border-primary'>
-    <div class='container d-flex flex-column'>
-      <div class='row align-items-center justify-content-center no-gutters min-vh-100'>
-        <div class='col-12 col-md-5 col-lg-4 py-8 py-md-11'>
-            <div class="card text-center">
-              <div class="card-header">
-              <h1 class='mb-0 font-weight-bold text-start'>Login</h1>
+      <div class='container d-flex flex-column'>
+        <div class='row align-items-center justify-content-center no-gutters min-vh-100'>
+          <div class='col-12 col-md-5 col-lg-4 py-8 py-md-11'>
+            <div class='card text-center'>
+              <div class='card-header'>
+                <h1 class='mb-0 font-weight-bold text-start'>Login</h1>
               </div>
-              <div class="card-body">
-              <div class='name text-start'>
+              <div class='card-body'>
+                <div class='name text-start'>
                   <label for='exampleInputEmail1'>Username</label>
                   <input
-                  type='email'
-                  class='form-control'
-                  id='exampleInputEmail1'
-                  placeholder='e.g. mark_lee1'
-                  ref={idRef}
+                    type='email'
+                    class='form-control'
+                    id='exampleInputEmail1'
+                    placeholder='e.g. mark_lee1'
+                    ref={idRef}
                   />
                   <div id='emailHelp' class='form-text'>
-                  We'll never share your user info with anyone else.
+                    We'll never share your user info with anyone else.
                   </div>
-                  </div>
-                  <p></p>
+                </div>
+                <p></p>
 
-                  <div class='form-group mb-5 text-start'>
+                <div class='form-group mb-5 text-start'>
                   <label for='password'>Password</label>
                   <input
-                  type='password'
-                  class='form-control'
-                  id='password'
-                  placeholder='Enter your password'
-                  ref={passwordRef}
+                    type='password'
+                    class='form-control'
+                    id='password'
+                    placeholder='Enter your password'
+                    ref={passwordRef}
                   />
-                  </div>
+                </div>
 
-                  <div>
+                <div>
                   <button
-                  class='btn btn-block btn-primary'
-                  type='button'
-                  onClick={clickBtnHandler}
+                    class='btn btn-block btn-primary'
+                    type='button'
+                    onClick={clickBtnHandler}
                   >
-                  Login 
+                    Login
                   </button>
-                  </div>
+                </div>
               </div>
-              </div>
-              </div>   
-              </div>
-              </div>
-              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
