@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthPage from './pages/Auth';
+import PlatformPage from './pages/Platform';
 import MainPage from './pages/MainPage';
 import Header from './components/Header';
 import './styles/global-style.scss';
@@ -51,6 +52,9 @@ function App() {
         <Switch>
           <Route path='/auth'>
             <AuthPage />
+          </Route>
+          <Route path='/creatorHome/platform'>
+            <PlatformPage />
           </Route>
         </Switch>
       </Router>
