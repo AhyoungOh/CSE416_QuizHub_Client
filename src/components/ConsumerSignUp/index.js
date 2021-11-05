@@ -33,86 +33,100 @@ function ConsumerSignUp() {
       console.error(e);
     }
   };
- return (
+  return (
     <section class='section-border border-primary'>
       <div class='container d-flex flex-column'>
+        <a href='/creatorHome'>CreatorHome</a>
         <div class='row align-items-center justify-content-end no-gutters min-vh-100'>
           <div class='col-12 col-md-5 col-lg-4 py-8 py-md-11'>
-              <div class="card text-center">
-                <div class="card-header">
+            <div class='card text-center'>
+              <div class='card-header'>
                 <h1 class='mb-0 font-weight-bold text-start'>Create account</h1>
                 <p></p>
-                <ul class="nav nav-pills card-header-pills">
-                  <li class="nav-item">
-                  <a class="nav-link active" data-toggle="pill" id="consumer" role="tab"  aria-selected="true">Consumer</a>
+                <ul class='nav nav-pills card-header-pills'>
+                  <li class='nav-item'>
+                    <a
+                      class='nav-link active'
+                      data-toggle='pill'
+                      id='consumer'
+                      role='tab'
+                      aria-selected='true'
+                    >
+                      Consumer
+                    </a>
                   </li>
-                  <li class="nav-item">
-                  <a class="nav-link" data-toggle="pill" href="/auth/creator_signup" id="creator" role="tab" aria-selected="false">Creator</a>
+                  <li class='nav-item'>
+                    <a
+                      class='nav-link'
+                      data-toggle='pill'
+                      href='/auth/creator_signup'
+                      id='creator'
+                      role='tab'
+                      aria-selected='false'
+                    >
+                      Creator
+                    </a>
                   </li>
-                  </ul>
-                </div>
-              <div class="card-body">
-                <div class="tab-pane fade show active" id="pills-home">
+                </ul>
+              </div>
+              <div class='card-body'>
+                <div class='tab-pane fade show active' id='pills-home'>
                   <p class='mb-6 text-start text-muted'>
-                  Consumer will be taking quizzes
+                    Consumer will be taking quizzes
                   </p>
-        
+
                   <div class='name text-start'>
-                  <label for='username'>Username</label>
-                  <input
-                  type='Name'
-                  class='form-control'
-                  id='username'
-                  placeholder='e.g. mark_lee1'
-                  ref={usernameRef}
-                  />
+                    <label for='username'>Username</label>
+                    <input
+                      type='Name'
+                      class='form-control'
+                      id='username'
+                      placeholder='e.g. mark_lee1'
+                      ref={usernameRef}
+                    />
                   </div>
                   <p></p>
 
                   <div class='form-group text-start'>
-                  <label for='email'>Email Address</label>
-                  <input
-                  type='email'
-                  class='form-control'
-                  id='email'
-                  placeholder='name@address.com'
-                  ref={emailRef}
-                  />
+                    <label for='email'>Email Address</label>
+                    <input
+                      type='email'
+                      class='form-control'
+                      id='email'
+                      placeholder='name@address.com'
+                      ref={emailRef}
+                    />
                   </div>
                   <p></p>
 
                   <div class='form-group mb-5 text-start'>
-                  <label for='password'>Password</label>
-                  <input
-                  type='password'
-                  class='form-control'
-                  id='password'
-                  placeholder='Enter your password'
-                  ref={passwordRef}
-                  />
+                    <label for='password'>Password</label>
+                    <input
+                      type='password'
+                      class='form-control'
+                      id='password'
+                      placeholder='Enter your password'
+                      ref={passwordRef}
+                    />
                   </div>
 
                   <div>
-                  <button
-                  class='btn btn-block btn-primary'
-                  type='button'
-                  onClick={clickBtnHandler}
-                  >
-                  Sign up 
-                  </button>
+                    <button
+                      class='btn btn-block btn-primary'
+                      type='button'
+                      onClick={clickBtnHandler}
+                    >
+                      Sign up
+                    </button>
                   </div>
 
-          
                   <p class='mb-0 font-size-sm text-center text-muted'>
-                  Already have an account? <a href='/auth/signin'>Log in</a>.
+                    Already have an account? <a href='/auth/signin'>Log in</a>.
                   </p>
-       
-                  </div>
                 </div>
-                <div class="tab-pane fade">
-                 
-                </div>
-             </div>
+              </div>
+              <div class='tab-pane fade'></div>
+            </div>
           </div>
         </div>
       </div>
