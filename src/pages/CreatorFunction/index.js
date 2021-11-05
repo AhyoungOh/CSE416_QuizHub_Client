@@ -2,7 +2,7 @@ import Platform from '../../components/Platform';
 import Write from '../../components/Write';
 import Detail from '../../components/Detail';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
-
+import './style.scss';
 import { useState } from 'react';
 import useApiCall from '../../hooks/useApiCall';
 
@@ -12,7 +12,7 @@ function CreatorFunction() {
   const [loading, testData, error, fetchData] = useApiCall(
     `${process.env.REACT_APP_API_SERVER}/api/creatorHome`
   );
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   if (!testData) {
     return <></>;
@@ -47,18 +47,30 @@ function CreatorFunction() {
     //   />
     // );
   });
-
-  console.log('visible', visible);
   const id = location.pathname.split('/')[2];
   const selectedplatformData = testData.createPlatform.find((el) => {
     return el._id === id;
   });
-
   return (
     <div>
       <Switch>
         <Route exact path='/creatorHome'>
           <div className='board-components-wrapper'>{PlatformComponents}</div>
+          <button
+            className='open-button'
+            onClick={() => setVisible((state) => !state)}
+          >
+            +
+          </button>
+          {visible ? (
+            <Write
+              platformData={selectedplatformData}
+              setData={() => {}}
+              setVisible={setVisible}
+              fetchData={fetchData}
+            />
+          ) : /* Write(selectedplatformData, setVisible, fetchData) */
+          null}
         </Route>
         <Route path={`/creatorHome/:id`}>
           <Detail
@@ -66,24 +78,15 @@ function CreatorFunction() {
             setTestData={() => {}}
             setVisible={setVisible}
           />
-          {/* {Detail(selectedplatformData, setVisible)} */}
+          {visible ? (
+            <Write
+              platformData={selectedplatformData}
+              setData={() => {}}
+              setVisible={setVisible}
+              fetchData={fetchData}
+            />
+          ) : null}
         </Route>
-        <button
-          className='open-button'
-          onClick={() => setVisible((state) => !state)}
-        ></button>
-        {/* {visible ? ( */}
-        <Route path={`/creatorHome/:id`}>
-          <Write
-            platformData={selectedplatformData}
-            setData={() => {}}
-            setVisible={setVisible}
-            fetchData={fetchData}
-          />
-        </Route>
-        {/* ) :  */}
-        {/* Write(selectedplatformData, setVisible, fetchData) */}
-        {/* null} */}
       </Switch>
     </div>
   );

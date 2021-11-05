@@ -2,7 +2,6 @@ import Platform from '../Platform';
 import Content from './Content';
 
 function Detail({ platformData, setVisible }) {
-  console.log('detail visible', typeof setVisible);
   // return (
   //   <div>
   //     <Platform

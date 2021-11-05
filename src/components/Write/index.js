@@ -5,7 +5,6 @@ import './style.scss';
 import { useHistory } from 'react-router-dom';
 
 function Write({ platformData, setVisible, fetchData }) {
-  console.log('write', typeof setVisible);
   const [title, setTitle] = useState(platformData?.platformName || '');
   const [imageLink, setImageLink] = useState(platformData?.platformImage || '');
   const [time, setTime] = useState(platformData?.createdDate || '');
@@ -18,7 +17,7 @@ function Write({ platformData, setVisible, fetchData }) {
     await axios.post(`${process.env.REACT_APP_API_SERVER}/api/creatorHome`, {
       title,
       imageLink,
-      time,
+      time: Date.now(),
       contents,
     });
     setVisible(false);
@@ -26,12 +25,16 @@ function Write({ platformData, setVisible, fetchData }) {
   };
 
   const updateplatformData = async () => {
-    await axios.put(`${process.env.REACT_APP_API_SERVER}/api/creatorHome`, {
-      _id: platformData._id,
-      title,
-      imageLink,
-      contents,
-    });
+    await axios.put(
+      `${process.env.REACT_APP_API_SERVER}/api/creatorHome/${platformData._id}`,
+      {
+        _id: platformData._id,
+        title,
+        imageLink,
+        contents,
+        time,
+      }
+    );
     setVisible(false);
     fetchData();
     history.push('/');
@@ -45,14 +48,13 @@ function Write({ platformData, setVisible, fetchData }) {
     fetchData();
     history.push('/');
   };
-
-  if (platformData === null) {
+  if (platformData === undefined) {
     return (
       <div
         className='write'
-        onClick={() => {
-          setVisible(false);
-        }}
+        // onClick={() => {
+        //   setVisible(false);
+        // }}
       >
         <div className='inputs-wrapper'>
           <Input title={'Platform Title'} value={title} setValue={setTitle} />
@@ -62,12 +64,9 @@ function Write({ platformData, setVisible, fetchData }) {
             setValue={setImageLink}
           />
           <Input title={'content'} value={contents} setValue={setContents} />
-          {/* {Input('Platform Title', title, setTitle)} */}
-          {/* {Input('Image Link', imageLink, setImageLink)} */}
-          {/* {Input('Content', contents, setContents)} */}
           <div className='button-wrapper'>
             <button className='green' onClick={createplatformData}>
-              Update
+              Create
             </button>
             <button
               className='red'
