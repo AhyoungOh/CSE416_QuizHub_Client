@@ -1,31 +1,14 @@
 import './style.scss';
 
-function Platform(
-  title,
-  timeLimit,
-  trials,
-  description,
-  reward,
-  leaderboard,
-  imageLink,
-  setQuizData
-) {
+function Platform(title, time, imageLink, setplatformData) {
   return (
-    <div className='quiz' onClick={setQuizData}>
+    <div className='platform' onClick={setplatformData}>
       <div className='picture'>
         <img alt={title} src={imageLink} />
       </div>
       <div className='contents'>
-        <div className='quizName'>{title}</div>
-        <div className='time'>
-          <div className='timelimit'>{timeLimit}</div>
-          <div className='trials'>{trials}</div>
-          <dic className='description'>{description}</dic>
-        </div>
-        <div className='rewards'>
-          <div className='reward'>{reward}</div>
-          <div className='leaderboard'>{leaderboard}</div>
-        </div>
+        <div className='platformname'>{title}</div>
+        <div className='time'>{time}</div>
       </div>
     </div>
   );

@@ -1,18 +1,16 @@
-import Platform from '../../components/Board';
+import Platform from '../../components/Platform';
 import Write from '../../components/Write';
 import Detail from '../../components/Detail';
-import { Route, useHistory, useLocation } from 'react-router-dom';
-
-import './style.scss';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import { useState } from 'react';
 import useApiCall from '../../hooks/useApiCall';
 
-function Platform() {
+function CreatorFunction() {
   const history = useHistory();
-  const location = useLocation(); // 현재 url에서 id값을 얻기 위해
+  const location = useLocation();
   const [loading, testData, error, fetchData] = useApiCall(
-    `${process.env.REACT_APP_API_SERVER}/api/board`
+    `${process.env.REACT_APP_API_SERVER}/api/creatorHome`
   );
 
   const [visible, setVisible] = useState(false);
@@ -22,64 +20,59 @@ function Platform() {
   }
 
   if (loading) {
-    return <>로딩중...</>;
+    return <>loading...</>;
   }
 
   if (error) {
-    return <>에러 : {error}</>;
+    return <>error : {error}</>;
   }
 
-  const BoardComponents = testData.map((boardData) => {
+  const PlatformComponents = testData.map((platformData) => {
     return (
-      <Board
-        key={boardData._id}
-        title={boardData.title}
-        category={boardData.category}
-        time={boardData.time}
-        price={boardData.price}
-        user={boardData.user}
-        imageLink={boardData.imageLink}
-        setBoardData={() => {
-          history.push(`/board/${boardData._id}`);
+      <Platform
+        key={platformData._id}
+        title={platformData.platformName}
+        time={platformData.createdDate}
+        imageLink={platformData.platformImage}
+        setplatformData={() => {
+          history.push(`/creatorHome/${platformData._id}`);
         }}
       />
     );
   });
-  // 현재 url에서 id값을 얻음
-  // location.pathname => /board/id값
-  // .split('/') => ['', 'board', 'id값']
-  // [2] => 'id값'
   const id = location.pathname.split('/')[2];
-  const selectedBoardData = testData.find((el) => {
+  const selectedplatformData = testData.find((el) => {
     return el._id === id;
   });
 
   return (
     <div>
-      <Route exact path='/'>
-        <div className='board-components-wrapper'>{BoardComponents}</div>
-      </Route>
-      <Route path={`/board/:id`}>
-        <Detail
-          boardData={selectedBoardData}
-          setTestData={() => {}}
-          setVisible={setVisible}
-        />
-      </Route>
-      <button
-        className='open-button'
-        onClick={() => setVisible((state) => !state)}
-      ></button>
-      {visible ? (
-        <Write
-          boardData={selectedBoardData}
-          setData={() => {}}
-          setVisible={setVisible}
-          fetchData={fetchData}
-        />
-      ) : null}
+      <Switch>
+        <Route exact path='/creatorHome'>
+          <div className='board-components-wrapper'>{PlatformComponents}</div>
+        </Route>
+        <Route path={`/creatorHome/:id`}>
+          <Detail
+            platformData={selectedplatformData}
+            setTestData={() => {}}
+            setVisible={setVisible}
+          />
+        </Route>
+        <button
+          className='open-button'
+          onClick={() => setVisible((state) => !state)}
+        ></button>
+        {visible ? (
+          <Write
+            platformData={selectedplatformData}
+            setData={() => {}}
+            setVisible={setVisible}
+            fetchData={fetchData}
+          />
+        ) : null}
+      </Switch>
     </div>
   );
 }
 
-export default Platform;
+export default CreatorFunction;

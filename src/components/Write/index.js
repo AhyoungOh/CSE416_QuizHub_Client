@@ -4,33 +4,31 @@ import Input from './Input';
 import './style.scss';
 import { useHistory } from 'react-router-dom';
 
-function Write({ quizData, setVisible, fetchData }) {
-  const [title, setTitle] = useState(quizData?.title || '');
-  const [imageLink, setImageLink] = useState(quizData?.imageLink || '');
-  const [category, setCategory] = useState(quizData?.category || '');
-  const [price, setPrice] = useState(quizData?.price || '');
-  const [contents, setContents] = useState(quizData?.contents || '');
+function Write({ platformData, setVisible, fetchData }) {
+  const [title, setTitle] = useState(platformData?.platformName || '');
+  const [imageLink, setImageLink] = useState(platformData?.platformImage || '');
+  const [time, setTime] = useState(platformData?.createdDate || '');
+  const [contents, setContents] = useState(
+    platformData?.platformDescription || ''
+  );
   const history = useHistory();
 
-  const createquizData = async () => {
-    await axios.post(`${process.env.REACT_APP_API_SERVER}/api/board`, {
+  const createplatformData = async () => {
+    await axios.post(`${process.env.REACT_APP_API_SERVER}/api/creatorHome`, {
       title,
       imageLink,
-      category,
-      price,
+      time,
       contents,
     });
     setVisible(false);
     fetchData();
   };
 
-  const updatequizData = async () => {
-    await axios.put(`${process.env.REACT_APP_API_SERVER}/api/board`, {
-      _id: quizData._id, // 어떤 걸 수정해야 될 지 알려주어야 함
+  const updateplatformData = async () => {
+    await axios.put(`${process.env.REACT_APP_API_SERVER}/api/creatorHome`, {
+      _id: platformData._id,
       title,
       imageLink,
-      category,
-      price,
       contents,
     });
     setVisible(false);
@@ -38,19 +36,16 @@ function Write({ quizData, setVisible, fetchData }) {
     history.push('/');
   };
 
-  const deletequizData = async () => {
+  const deleteplatformData = async () => {
     await axios.delete(
-      `${process.env.REACT_APP_API_SERVER}/api/board/${quizData._id}`
+      `${process.env.REACT_APP_API_SERVER}/api/creatorHome/${platformData._id}`
     );
-    // 2. Write 안보이게 하기
     setVisible(false);
-    // 3. fetchData 호출
     fetchData();
-    // 4. quizData 를 null로 바꾼다. => main으로 간다.
     history.push('/');
   };
 
-  if (quizData === null) {
+  if (platformData === null) {
     return (
       <div
         className='write'
@@ -59,23 +54,16 @@ function Write({ quizData, setVisible, fetchData }) {
         }}
       >
         <div className='inputs-wrapper'>
-          <Input title={'글 제목'} value={title} setValue={setTitle} />
+          <Input title={'Platform Title'} value={title} setValue={setTitle} />
           <Input
-            title={'사진 링크'}
+            title={'Image Link'}
             value={imageLink}
             setValue={setImageLink}
           />
-          <Input title={'카테고리'} value={category} setValue={setCategory} />
-          <Input
-            title={'가격'}
-            value={price}
-            setValue={setPrice}
-            inputType={'number'}
-          />
-          <Input title={'글 내용'} value={contents} setValue={setContents} />
+          <Input title={'content'} value={contents} setValue={setContents} />
           <div className='button-wrapper'>
-            <button className='green' onClick={createquizData}>
-              작성하기
+            <button className='green' onClick={createplatformData}>
+              Update
             </button>
             <button
               className='red'
@@ -83,14 +71,14 @@ function Write({ quizData, setVisible, fetchData }) {
                 setVisible(false);
               }}
             >
-              취소하기
+              Cancel
             </button>
           </div>
         </div>
       </div>
     );
   } else {
-    // 여기는 수정하기
+    // edit part
     return (
       <div
         className='write'
@@ -99,26 +87,19 @@ function Write({ quizData, setVisible, fetchData }) {
         }}
       >
         <div className='inputs-wrapper'>
-          <Input title={'글 제목'} value={title} setValue={setTitle} />
+          <Input title={'Platform Title'} value={title} setValue={setTitle} />
           <Input
-            title={'사진 링크'}
+            title={'Image Link'}
             value={imageLink}
             setValue={setImageLink}
           />
-          <Input title={'카테고리'} value={category} setValue={setCategory} />
-          <Input
-            title={'가격'}
-            value={price}
-            setValue={setPrice}
-            inputType={'number'}
-          />
-          <Input title={'글 내용'} value={contents} setValue={setContents} />
+          <Input title={'content'} value={contents} setValue={setContents} />
           <div className='button-wrapper'>
-            <button className='green' onClick={updatequizData}>
-              수정하기
+            <button className='green' onClick={updateplatformData}>
+              Edit
             </button>
-            <button className='red' onClick={deletequizData}>
-              삭제하기
+            <button className='red' onClick={deleteplatformData}>
+              Delete
             </button>
           </div>
         </div>

@@ -1,14 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthPage from './pages/Auth';
 import CreatorFunctionPage from './pages/CreatorFunction';
-import MainPage from './pages/MainPage';
+import Platform from './components/Platform';
 import Header from './components/Header';
 import './styles/global-style.scss';
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle';
-
 import { useReducer, createContext } from 'react';
 import dotenv from 'dotenv';
 import ConsumerSignUp from './components/ConsumerSignUp';
+
 dotenv.config();
 
 const userReducer = (state, action) => {
@@ -53,7 +52,7 @@ function App() {
           <Route path='/auth'>
             <AuthPage />
           </Route>
-          <Route path='/creatorHome/platform'>
+          <Route path='/creatorHome'>
             <CreatorFunctionPage />
           </Route>
         </Switch>

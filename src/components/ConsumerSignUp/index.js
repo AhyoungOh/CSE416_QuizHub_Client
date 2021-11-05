@@ -36,6 +36,7 @@ function ConsumerSignUp() {
   return (
     <section class='section-border border-primary'>
       <div class='container d-flex flex-column'>
+        <a href='/creatorHome'>CreatorHome</a>
         <div class='row align-items-center justify-content-end no-gutters min-vh-100'>
           <div class='col-12 col-md-5 col-lg-4 py-8 py-md-11'>
             <div class='card text-center'>
