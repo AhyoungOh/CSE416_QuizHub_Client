@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthPage from './pages/Auth';
 import CreatorFunctionPage from './pages/CreatorFunction';
-import Platform from './components/Platform';
 import Header from './components/Header';
 import './styles/global-style.scss';
 import { useReducer, createContext } from 'react';

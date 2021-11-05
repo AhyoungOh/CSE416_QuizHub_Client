@@ -12,7 +12,6 @@ function CreatorFunction() {
   const [loading, testData, error, fetchData] = useApiCall(
     `${process.env.REACT_APP_API_SERVER}/api/creatorHome`
   );
-
   const [visible, setVisible] = useState(false);
 
   if (!testData) {
@@ -26,7 +25,7 @@ function CreatorFunction() {
   if (error) {
     return <>error : {error}</>;
   }
-
+  console.log('testdata', testData);
   const PlatformComponents = testData.map((platformData) => {
     return (
       <Platform
@@ -40,15 +39,16 @@ function CreatorFunction() {
       />
     );
   });
+  console.log('platformcomponents', PlatformComponents);
   const id = location.pathname.split('/')[2];
   const selectedplatformData = testData.find((el) => {
     return el._id === id;
   });
-
+  console.log('selected: ', selectedplatformData);
   return (
     <div>
       <Switch>
-        <Route exact path='/creatorHome'>
+        <Route exact path='/creatorHome/get'>
           <div className='board-components-wrapper'>{PlatformComponents}</div>
         </Route>
         <Route path={`/creatorHome/:id`}>
