@@ -37,7 +37,7 @@ function Write({ platformData, setVisible, fetchData }) {
     );
     setVisible(false);
     fetchData();
-    history.push('/');
+    history.push('/creatorHome');
   };
 
   const deleteplatformData = async () => {
@@ -46,7 +46,7 @@ function Write({ platformData, setVisible, fetchData }) {
     );
     setVisible(false);
     fetchData();
-    history.push('/');
+    history.push('/creatorHome');
   };
   if (platformData === undefined) {
     return (
