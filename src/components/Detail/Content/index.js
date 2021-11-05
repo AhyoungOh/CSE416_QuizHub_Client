@@ -1,16 +1,16 @@
 import './style.scss';
 
 function Content({ content, setVisible }) {
-  const updateBoardData = () => {
+  const updatePlatformData = () => {
+    console.log('qwer', setVisible);
     setVisible(true);
   };
-
   return (
     <div className='detail-content'>
-      <div className='content-title'>Platform</div>
+      <div className='content-title'>Platform Description</div>
       <div className='content-text'>{content}</div>
       <div className='buttons'>
-        <button onClick={updateBoardData}>Edit</button>
+        <button onClick={updatePlatformData}>Edit</button>
       </div>
     </div>
   );

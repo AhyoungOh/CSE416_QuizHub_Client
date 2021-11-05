@@ -25,38 +25,47 @@ function CreatorFunction() {
   if (error) {
     return <>error : {error}</>;
   }
-  console.log('testdata', testData);
-  const PlatformComponents = testData.map((platformData) => {
-    return (
-      <Platform
-        key={platformData._id}
-        title={platformData.platformName}
-        time={platformData.createdDate}
-        imageLink={platformData.platformImage}
-        setplatformData={() => {
-          history.push(`/creatorHome/${platformData._id}`);
-        }}
-      />
+  const PlatformComponents = testData.createPlatform.map((platformData) => {
+    return Platform(
+      platformData.platformName,
+      platformData.createdDate,
+      platformData.platformImage,
+      () => {
+        history.push(`/creatorHome/${platformData._id}`);
+      }
     );
+
+    // return (
+    //   <Platform
+    //     key={platformData._id}
+    //     title={platformData.platformName}
+    //     time={platformData.createdDate}
+    //     imageLink={platformData.platformImage}
+    //     setplatformData={() => {
+    //       history.push(`/creatorHome/${platformData._id}`);
+    //     }}
+    //   />
+    // );
   });
-  console.log('platformcomponents', PlatformComponents);
   const id = location.pathname.split('/')[2];
-  const selectedplatformData = testData.find((el) => {
+  const selectedplatformData = testData.createPlatform.find((el) => {
     return el._id === id;
   });
-  console.log('selected: ', selectedplatformData);
+
   return (
     <div>
       <Switch>
-        <Route exact path='/creatorHome/get'>
+        <Route exact path='/creatorHome/'>
           <div className='board-components-wrapper'>{PlatformComponents}</div>
         </Route>
         <Route path={`/creatorHome/:id`}>
           <Detail
             platformData={selectedplatformData}
             setTestData={() => {}}
-            setVisible={setVisible}
+            //setVisible={setVisible}
+            setVisible={visible}
           />
+          {/* {Detail(selectedplatformData, setVisible)} */}
         </Route>
         <button
           className='open-button'
@@ -66,10 +75,12 @@ function CreatorFunction() {
           <Write
             platformData={selectedplatformData}
             setData={() => {}}
-            setVisible={setVisible}
+            //setVisible={setVisible}
+            setVisible={visible}
             fetchData={fetchData}
           />
-        ) : null}
+        ) : // Write(selectedplatformData, setVisible, fetchData)
+        null}
       </Switch>
     </div>
   );
