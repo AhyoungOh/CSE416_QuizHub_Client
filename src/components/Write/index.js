@@ -5,6 +5,7 @@ import './style.scss';
 import { useHistory } from 'react-router-dom';
 
 function Write({ platformData, setVisible, fetchData }) {
+  console.log('write', typeof setVisible);
   const [title, setTitle] = useState(platformData?.platformName || '');
   const [imageLink, setImageLink] = useState(platformData?.platformImage || '');
   const [time, setTime] = useState(platformData?.createdDate || '');
@@ -54,16 +55,16 @@ function Write({ platformData, setVisible, fetchData }) {
         }}
       >
         <div className='inputs-wrapper'>
-          {/* <Input title={'Platform Title'} value={title} setValue={setTitle} /> */}
-          {/* <Input
+          <Input title={'Platform Title'} value={title} setValue={setTitle} />
+          <Input
             title={'Image Link'}
             value={imageLink}
             setValue={setImageLink}
-          /> */}
-          {/* <Input title={'content'} value={contents} setValue={setContents} /> */}
-          {Input('Platform Title', title, setTitle)}
-          {Input('Image Link', imageLink, setImageLink)}
-          {Input('Content', contents, setContents)}
+          />
+          <Input title={'content'} value={contents} setValue={setContents} />
+          {/* {Input('Platform Title', title, setTitle)} */}
+          {/* {Input('Image Link', imageLink, setImageLink)} */}
+          {/* {Input('Content', contents, setContents)} */}
           <div className='button-wrapper'>
             <button className='green' onClick={createplatformData}>
               Update
@@ -90,16 +91,16 @@ function Write({ platformData, setVisible, fetchData }) {
         }}
       >
         <div className='inputs-wrapper'>
-          {/* <Input title={'Platform Title'} value={title} setValue={setTitle} />
+          <Input title={'Platform Title'} value={title} setValue={setTitle} />
           <Input
             title={'Image Link'}
             value={imageLink}
             setValue={setImageLink}
           />
-          <Input title={'content'} value={contents} setValue={setContents} /> */}
-          {Input('Platform Title', title, setTitle)}
-          {Input('Image Link', imageLink, setImageLink)}
-          {Input('Content', contents, setContents)}
+          <Input title={'content'} value={contents} setValue={setContents} />
+          {/* {Input('Platform Title', title, setTitle)} */}
+          {/* {Input('Image Link', imageLink, setImageLink)} */}
+          {/* {Input('Content', contents, setContents)} */}
           <div className='button-wrapper'>
             <button className='green' onClick={updateplatformData}>
               Update

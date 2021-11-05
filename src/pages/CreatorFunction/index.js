@@ -12,7 +12,7 @@ function CreatorFunction() {
   const [loading, testData, error, fetchData] = useApiCall(
     `${process.env.REACT_APP_API_SERVER}/api/creatorHome`
   );
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   if (!testData) {
     return <></>;
@@ -47,6 +47,8 @@ function CreatorFunction() {
     //   />
     // );
   });
+
+  console.log('visible', visible);
   const id = location.pathname.split('/')[2];
   const selectedplatformData = testData.createPlatform.find((el) => {
     return el._id === id;
@@ -55,15 +57,14 @@ function CreatorFunction() {
   return (
     <div>
       <Switch>
-        <Route exact path='/creatorHome/'>
+        <Route exact path='/creatorHome'>
           <div className='board-components-wrapper'>{PlatformComponents}</div>
         </Route>
         <Route path={`/creatorHome/:id`}>
           <Detail
             platformData={selectedplatformData}
             setTestData={() => {}}
-            //setVisible={setVisible}
-            setVisible={visible}
+            setVisible={setVisible}
           />
           {/* {Detail(selectedplatformData, setVisible)} */}
         </Route>
@@ -71,16 +72,18 @@ function CreatorFunction() {
           className='open-button'
           onClick={() => setVisible((state) => !state)}
         ></button>
-        {visible ? (
+        {/* {visible ? ( */}
+        <Route path={`/creatorHome/:id`}>
           <Write
             platformData={selectedplatformData}
             setData={() => {}}
-            //setVisible={setVisible}
-            setVisible={visible}
+            setVisible={setVisible}
             fetchData={fetchData}
           />
-        ) : // Write(selectedplatformData, setVisible, fetchData)
-        null}
+        </Route>
+        {/* ) :  */}
+        {/* Write(selectedplatformData, setVisible, fetchData) */}
+        {/* null} */}
       </Switch>
     </div>
   );

@@ -2,7 +2,7 @@ import Platform from '../Platform';
 import Content from './Content';
 
 function Detail({ platformData, setVisible }) {
-  console.log('visible', setVisible);
+  console.log('detail visible', typeof setVisible);
   // return (
   //   <div>
   //     <Platform
@@ -23,7 +23,11 @@ function Detail({ platformData, setVisible }) {
         platformData.createdDate,
         platformData.platformImage
       )}
-      {Content(platformData.platformDescription, setVisible)}
+      {/* {Content(platformData.platformDescription, setVisible)} */}
+      <Content
+        setVisible={setVisible}
+        content={platformData.platformDescription}
+      />
     </div>
   );
 }

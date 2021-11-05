@@ -1,8 +1,8 @@
 import './style.scss';
 
 function Content({ content, setVisible }) {
+  console.log('content visible', typeof setVisible);
   const updatePlatformData = () => {
-    console.log('qwer', setVisible);
     setVisible(true);
   };
   return (
